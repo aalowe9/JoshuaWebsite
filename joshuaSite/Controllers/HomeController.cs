@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Web;
@@ -21,7 +22,7 @@ namespace joshuaSite.Controllers
         // GET: Home
         public  ActionResult Index()
         {
-            var credentials = new BasicAWSCredentials("AKIAJPKNX6O34KAXNZUA", "A+QAJxiu+8Xj/UBEA+e8Gj15Pj3f9cwi3uHtO7ED");
+            var credentials = new BasicAWSCredentials(ConfigurationManager.AppSettings["AccessKey"], ConfigurationManager.AppSettings["SecretKey"]);
             var client = new AmazonDynamoDBClient(credentials, RegionEndpoint.EUWest1);
 
             Table DateTable = Table.LoadTable(client, tableName);
