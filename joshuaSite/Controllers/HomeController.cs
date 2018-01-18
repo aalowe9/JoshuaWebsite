@@ -53,6 +53,12 @@ namespace joshuaSite.Controllers
                             d.DateString = x.AsPrimitive().Value.ToString();
                             d.DateTime = DateTime.ParseExact(d.DateString, "dd-MM-yyyy", null);
                             break;
+                        case "ImageURL":
+                            Image img = new Image();
+                            img.ImagePath = x.AsPrimitive().Value.ToString();
+                            d.Images = new List<Image>();
+                            d.Images.Add(img); // only 1 image supported for now
+                            break;
                         case "Synopsis":
                             d.Synopsis = x.AsPrimitive().Value.ToString();
                             break;
