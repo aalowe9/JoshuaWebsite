@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -23,8 +24,6 @@ namespace joshuaSite.Controllers
             var credentials = new BasicAWSCredentials("AKIAJPKNX6O34KAXNZUA", "A+QAJxiu+8Xj/UBEA+e8Gj15Pj3f9cwi3uHtO7ED");
             var client = new AmazonDynamoDBClient(credentials, RegionEndpoint.EUWest1);
 
-
-
             Table DateTable = Table.LoadTable(client, tableName);
             ScanFilter scanFilter = new ScanFilter();
             scanFilter.AddCondition("TextContent", ScanOperator.IsNotNull);
@@ -43,21 +42,55 @@ namespace joshuaSite.Controllers
                     var x = doc[e];
                     switch (e)
                     {
+                        case "ID":
+                            d.ID = x.AsPrimitive().Value.ToString();
+                            break;
                         case "TextContent":
                             d.TextContent = x.AsPrimitive().Value.ToString();
                             break;
                         case "DateStamp":
                             d.DateString = x.AsPrimitive().Value.ToString();
+                            d.DateTime = DateTime.Parse(d.DateString);
+                            break;
+                        case "Synopsis":
+                            d.Synopsis = x.AsPrimitive().Value.ToString();
                             break;
                     }
-                   
+                   var r = new Random();
+                    if (r.Next(0, 2) == 0)
+                    {
+                        d.Rand = 0;
+                    }
+                    else
+                    {
+                        d.Rand = 1;
+                    }
                 }
 
                 allDates.Add(d);
             }
 
+            var dateGroups = allDates.GroupBy(m => m.DateTime.Year).OrderBy(m => m.Key);
+            List<YearContainer> years = new List<YearContainer>();
 
-            return View("Index");
+            foreach (var groupingByClassA in dateGroups)
+            {
+                YearContainer y = new YearContainer();
+                y.Year = groupingByClassA.Key.ToString();
+                y.DateItems = new List<DateItem>();
+
+                var ordered = groupingByClassA.OrderBy(m => m.DateTime);
+                //iterating through values
+                foreach (var d in ordered)
+                {
+                   y.DateItems.Add(d);
+                }
+
+                years.Add(y);
+            }
+
+
+            return View("Index", years);
         }
     }
 }

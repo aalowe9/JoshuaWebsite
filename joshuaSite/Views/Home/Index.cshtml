@@ -1,7 +1,78 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-}
+﻿@using joshuaSite.Models
+@model List<joshuaSite.Models.YearContainer>
+    
+<div class="timeline">
+    
+    @foreach (YearContainer uc in Model)
+    {
+        <h2>
+            @uc.Year
+        </h2>
 
-<h2>Index Test</h2>
+        <ul class="timeline-items">
 
+            @foreach (DateItem di in uc.DateItems)
+            {
+
+                if (di.SpecialDate)
+                {
+                    <li class="is-hidden timeline-item centered">
+                        <h3>@di.Synopsis</h3>
+                        <hr>
+                        <p>@di.TextContent</p>
+                        <hr>
+                        <time>@di.DateString</time>
+                    </li>
+                }
+                else
+                {
+
+
+                    if (di.Rand == 0)
+                    {
+                        <li class="is-hidden timeline-item">
+                            <h3>@di.Synopsis</h3>
+                            <hr>
+                            <p>@di.TextContent</p>
+                            <hr>
+                            <time>@di.DateString</time>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="is-hidden timeline-item inverted">
+                            <h3>@di.Synopsis</h3>
+                            <hr>
+                            <p>@di.TextContent</p>
+                            <hr>
+                            <time>@di.DateString</time>
+                        </li>
+                    }
+
+
+
+                    
+                }
+
+
+            }
+        
+        </ul>
+
+            
+    }
+    
+
+</div>
+
+<script src="/Scripts/jquery.js"></script>
+<script src="/Scripts/jquery.timelify.js"></script>
+<script>
+    $('.timeline').timelify({
+        animLeft: "fadeInLeft",
+        animCenter: "fadeInUp",
+        animRight: "fadeInRight",
+        animSpeed: 1000,
+        offset: 150
+    });
+</script>
