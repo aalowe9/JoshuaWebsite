@@ -51,13 +51,14 @@ namespace joshuaSite.Controllers
                             break;
                         case "DateStamp":
                             d.DateString = x.AsPrimitive().Value.ToString();
-                            d.DateTime = DateTime.Parse(d.DateString);
+                            d.DateTime = DateTime.ParseExact(d.DateString, "dd-MM-yyyy", null);
                             break;
                         case "Synopsis":
                             d.Synopsis = x.AsPrimitive().Value.ToString();
                             break;
                     }
                    var r = new Random();
+                    
                     if (r.Next(0, 2) == 0)
                     {
                         d.Rand = 0;
@@ -69,6 +70,7 @@ namespace joshuaSite.Controllers
                 }
 
                 allDates.Add(d);
+                System.Threading.Thread.Sleep(100); // added because otherwise random seems to pick the same number ???
             }
 
             var dateGroups = allDates.GroupBy(m => m.DateTime.Year).OrderBy(m => m.Key);
