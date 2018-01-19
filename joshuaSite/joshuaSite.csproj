@@ -99,13 +99,18 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\lightbox.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\timelify.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="img\close.png" />
     <Content Include="img\image6.jpg" />
+    <Content Include="img\loading.gif" />
+    <Content Include="img\next.png" />
     <Content Include="img\pattern.svg" />
+    <Content Include="img\prev.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\fontawesome-webfont.eot" />
@@ -115,6 +120,8 @@
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.timelify.js" />
+    <Content Include="Scripts\lightbox-plus-jquery.js" />
+    <Content Include="Scripts\lightbox.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config" />
   </ItemGroup>

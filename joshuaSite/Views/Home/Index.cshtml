@@ -21,6 +21,17 @@
                         <hr>
                         <p>@di.TextContent</p>
               
+                        @if (di.Images.Count > 0)
+                        {
+                            foreach (Image img in di.Images)
+                            {
+                                <a href="@img.ImagePath" data-lightbox="@img.ImagePath" data-title="@img.Caption" >
+                                    <img src="@img.ImagePath" />
+                                </a>
+                            }
+                           
+                        }
+
                         <hr>
                         <time>@di.DateString</time>
                     </li>
@@ -35,7 +46,18 @@
                             <h3>@di.Synopsis</h3>
                             <hr>
                             <p>@di.TextContent</p>
-                            <img src="@di.Images[0].ImagePath"/>
+                            
+                            @if (di.Images.Count > 0)
+                            {
+                                foreach (Image img in di.Images)
+                                {
+                                    <a href="@img.ImagePath" data-lightbox = "@img.ImagePath" data-title="@img.Caption" >
+                                        <img src="@img.ImagePath" />
+                                    </a>
+                                }
+                           
+                            }
+
                             <hr>
                             <time>@di.DateString</time>
                         </li>
@@ -46,21 +68,28 @@
                             <h3>@di.Synopsis</h3>
                             <hr>
                             <p>@di.TextContent</p>
+                            
+                            @if (di.Images.Count > 0)
+                            {
+                                foreach (Image img in di.Images)
+                                {
+                                    <a href="@img.ImagePath" data-lightbox="@img.ImagePath" data-title="@img.Caption" >
+                                        <img src="@img.ImagePath" />
+                                    </a>
+                                }
+                           
+                            }
+
                             <hr>
                             <time>@di.DateString</time>
                         </li>
                     }
-
-
-
                     
                 }
-
 
             }
         
         </ul>
-
             
     }
     
