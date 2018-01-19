@@ -128,11 +128,14 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DateItem.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\DynamoHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -146,6 +149,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="specialappsettings.config" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Login\Manager.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

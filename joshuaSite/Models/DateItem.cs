@@ -15,6 +15,7 @@ namespace joshuaSite.Models
         public bool SpecialDate { get; set; }
         public string Synopsis { get; set; }
         public int Rand { get; set; }
+        public DateTime FullDateStamp { get; set; }
     }
 
     public class Image

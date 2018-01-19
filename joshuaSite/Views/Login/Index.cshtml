@@ -1,0 +1,24 @@
+﻿@model joshuaSite.Models.LoginModel
+    
+
+<div class="wrapper">
+
+@using (Html.BeginForm("Index", "Login",  new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class= "form-signin" }) )
+{
+            @Html.ValidationSummary(true, "Login failed. Check your login details.");
+    <div>
+        <fieldset>
+            <h2 class="form-signin-heading">Please login</h2>
+
+                @Html.TextBoxFor(u => u.UserName, new { @class = "form-control", @placeholder="Username" })
+                @Html.ValidationMessageFor(u => u.UserName)
+
+                @Html.PasswordFor(u => u.Password, new { @class = "form-control", @placeholder = "Password" })
+                @Html.ValidationMessageFor(u => u.Password)
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>  
+        </fieldset>
+    </div>
+}
+
+</div>
