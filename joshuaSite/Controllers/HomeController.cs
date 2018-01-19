@@ -21,7 +21,6 @@ namespace joshuaSite.Controllers
         // GET: Home
         public  ActionResult Index()
         {
-            DynamoHelper.GetDate("91073409-5396-46e4-8c16-c6e49fcb8eaa");
 
             List<DateItem> allDates = DynamoHelper.GetAllDates("JoshuaDateTable");
             var dateGroups = allDates.GroupBy(m => m.DateTime.Year).OrderBy(m => m.Key);
