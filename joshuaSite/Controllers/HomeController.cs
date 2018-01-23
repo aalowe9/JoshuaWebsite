@@ -21,6 +21,7 @@ namespace joshuaSite.Controllers
         // GET: Home
         public  ActionResult Index()
         {
+            S3Helper.TestUpload();
 
             List<DateItem> allDates = DynamoHelper.GetAllDates("JoshuaDateTable");
             var dateGroups = allDates.GroupBy(m => m.DateTime.Year).OrderBy(m => m.Key);
