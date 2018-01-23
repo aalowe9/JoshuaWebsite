@@ -1,0 +1,106 @@
+﻿@model joshuaSite.Models.DateItem
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>DateItem</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateTime, new { htmlAttributes = new { @class = "form-control", @type="date" } })
+                @Html.ValidationMessageFor(model => model.DateTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TextContent, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TextContent, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TextContent, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SpecialDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.SpecialDate)
+                    @Html.ValidationMessageFor(model => model.SpecialDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Synopsis, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Synopsis, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Synopsis, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label>Select an image ...</label>
+            <div class="panel panel-default img-upload">
+                <div class="panel-heading">
+                    <ul class="nav nav-pills">
+                        <li class="img-file-btn active">
+                            <a href="javascript:;">File</a>
+                        </li>
+                        <li class="img-url-btn">
+                            <a href="javascript:;">URL</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="panel-body img-file-tab">
+                    <div>
+                        <span class="btn btn-default btn-file img-select-btn">
+                            <span>Browse</span>
+                            <input type="file" name="Image">
+                        </span>
+                        <span class="btn btn-default img-remove-btn">Remove</span>
+                    </div>
+                </div>
+                <div class="panel-body img-url-tab">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="http://example.com/image.jpg">
+                        <span class="input-group-btn">
+                            <span class="btn btn-default img-select-btn">Submit</span>
+                        </span>
+                    </div>
+                    <input type="hidden" name="img-url-input">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+<script src="~/Scripts/img-upload.js"></script>
+<script>
+
+    $('.img-upload').imgUpload({
+        allowedFormats: ["jpg", "jpeg", "png", "gif"],
+        previewWidth: 250,
+        previewHeight: 250,
+        maxFileSizeKb: 2048
+    });
+
+
+
+</script>

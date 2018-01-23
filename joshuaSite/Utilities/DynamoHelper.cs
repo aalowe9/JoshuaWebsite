@@ -163,13 +163,13 @@ namespace joshuaSite.Utilities
             }
         }
 
-        public static void DeleteDateItem(DateItem d)
+        public static void DeleteDateItem(string id)
         {
             using (var client = Connect())
             {
                 DynamoDBContext context = new DynamoDBContext(client);
 
-                context.Delete<JoshuaDate>(d.ID);  
+                context.Delete<JoshuaDate>(id);  
             }
         }
     }

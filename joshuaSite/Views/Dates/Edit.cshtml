@@ -1,0 +1,90 @@
+﻿@model joshuaSite.Models.DateItem
+
+
+<div class="wrapper">
+    
+    
+
+
+    @using (Html.BeginForm("Edit", "Dates",  new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class= "form-signin", @enctype = "multipart/form-data" }) )
+    {
+        <h2 class="form-signin-heading">@Model.DateString</h2>
+        @Html.ValidationSummary(true, "Login failed. Check your login details.");
+        <div>
+            <fieldset>
+                @Html.HiddenFor(m => m.DateString)
+                @Html.HiddenFor(m => m.DateTime)
+                @Html.HiddenFor(m => m.FullDateStamp)
+                @Html.HiddenFor(m => m.SpecialDate)
+
+                @Html.LabelFor(m => m.Synopsis)
+                @Html.TextBoxFor(u => u.Synopsis, new {@class = "form-control", @placeholder = "Synopsis", @id = "Synopsis"})
+                @Html.ValidationMessageFor(u => u.Synopsis)
+
+                @Html.LabelFor(m => m.TextContent)
+                @Html.TextBoxFor(u => u.TextContent, new {@class = "form-control", @placeholder = "More info...", @id = "TextContent"})
+
+                
+                @if (@Model.Images[0].ImagePath != null)
+                {
+                    <img src="@Model.Images[0].ImagePath" height="200"/>
+                }
+
+                <div class="form-group">
+                    <label>Select an image ...</label>
+                    <div class="panel panel-default img-upload">
+                        <div class="panel-heading">
+                            <ul class="nav nav-pills">
+                                <li class="img-file-btn active">
+                                    <a href="javascript:;">File</a>
+                                </li>
+                                <li class="img-url-btn">
+                                    <a href="javascript:;">URL</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="panel-body img-file-tab">
+                            <div>
+                                <span class="btn btn-default btn-file img-select-btn">
+                                    <span>Browse</span>
+                                    <input type="file" name="Image">
+                                </span>
+                                <span class="btn btn-default img-remove-btn">Remove</span>
+                            </div>
+                        </div>
+                        <div class="panel-body img-url-tab">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="http://example.com/image.jpg">
+                                <span class="input-group-btn">
+                                    <span class="btn btn-default img-select-btn">Submit</span>
+                                </span>
+                            </div>
+                            <input type="hidden" name="img-url-input">
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit" id="submit-all">Update</button>
+            </fieldset>
+        </div>
+    }
+
+</div>
+
+
+
+<script src="~/Scripts/img-upload.js"></script>
+<script>
+
+    $('.img-upload').imgUpload({
+        allowedFormats: ["jpg", "jpeg", "png", "gif"],
+        previewWidth: 250,
+        previewHeight: 250,
+        maxFileSizeKb: 2048
+    });
+
+
+
+</script>

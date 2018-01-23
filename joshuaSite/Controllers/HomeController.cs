@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Amazon;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
@@ -21,9 +22,8 @@ namespace joshuaSite.Controllers
         // GET: Home
         public  ActionResult Index()
         {
-            S3Helper.TestUpload();
-
-            List<DateItem> allDates = DynamoHelper.GetAllDates("JoshuaDateTable");
+            FormsAuthentication.SignOut();
+            List<DateItem> allDates = DynamoHelper.GetAllDates("JWLDateTable");
             var dateGroups = allDates.GroupBy(m => m.DateTime.Year).OrderBy(m => m.Key);
             List<YearContainer> years = new List<YearContainer>();
 

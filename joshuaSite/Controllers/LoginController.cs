@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Amazon.Runtime;
 using joshuaSite.Models;
+using joshuaSite.Utilities;
 
 namespace joshuaSite.Controllers
 {
@@ -16,7 +17,7 @@ namespace joshuaSite.Controllers
         // GET: Login
         public ActionResult Index()
         {
-
+            
             return View(new LoginModel());
         }
 
@@ -33,21 +34,11 @@ namespace joshuaSite.Controllers
                     user.Password == p)
                 {
                     FormsAuthentication.SetAuthCookie(user.UserName, true);
-                    return RedirectToAction("Manager", "Login");
+                    return RedirectToAction("Manager", "Dates");
                 }
             }
             return View(user);
         }
 
-        [Authorize]
-        public ActionResult Manager()
-        {
-            //get all dates out of dynamo and allow editing
-
-            //show all dates in grid with edit button
-
-
-            return View();
-        }
     }
 }
