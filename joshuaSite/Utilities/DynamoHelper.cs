@@ -140,10 +140,13 @@ namespace joshuaSite.Utilities
                     TextContent = d.TextContent,
                     DateStamp = d.DateString,
                     FullDateStamp = d.FullDateStamp.ToString(CultureInfo.InvariantCulture),
-                    ImageURL = d.Images.FirstOrDefault()?.ImagePath,
                     Synopsis = d.Synopsis,
                     SpecialDate = d.SpecialDate
                 };
+                if (d.Images != null)
+                {
+                    x.ImageURL = d.Images.FirstOrDefault()?.ImagePath;
+                }
                 context.Save(x);
             }
         }
@@ -155,7 +158,10 @@ namespace joshuaSite.Utilities
                 DynamoDBContext context = new DynamoDBContext(client);
 
                 JoshuaDate x = context.Load<JoshuaDate>(d.ID);
-                x.ImageURL = d.Images.FirstOrDefault()?.ImagePath;
+                if (d.Images != null)
+                {
+                    x.ImageURL = d.Images.FirstOrDefault()?.ImagePath;
+                }
                 x.SpecialDate = d.SpecialDate;
                 x.Synopsis = d.Synopsis;
                 x.TextContent = d.TextContent;

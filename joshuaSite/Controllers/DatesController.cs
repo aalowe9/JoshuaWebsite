@@ -25,22 +25,27 @@ namespace joshuaSite.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult Edit(DateItem di, HttpPostedFileBase image)
+        public ActionResult Edit(DateItem di, HttpPostedFileBase image = null)
         {
             if (ModelState.IsValid)
             {
-                string[] names = image.FileName.Split('.');
-                string newName = Guid.NewGuid().ToString() + "." + names[names.Length-1];
-                image.SaveAs(Server.MapPath("~/_dynamic/") + newName);
-                //save image
-                S3Helper.SaveToS3(Server.MapPath("~/_dynamic/") + newName, "joshua-web-alexa-bucket", "UploadsFromAlexa", newName);
+                if (image != null)
+                {
+                    string[] names = image.FileName.Split('.');
+                    string newName = Guid.NewGuid().ToString() + "." + names[names.Length - 1];
+                    image.SaveAs(Server.MapPath("~/_dynamic/") + newName);
+                    //save image
+                    S3Helper.SaveToS3(Server.MapPath("~/_dynamic/") + newName, "joshua-web-alexa-bucket",
+                        "UploadsFromAlexa", newName);
 
 
-                di.Images = new List<Image>();
-                Image i = new Image();
-                i.ImagePath = "https://s3-eu-west-1.amazonaws.com/joshua-web-alexa-bucket/UploadsFromAlexa/" + newName;
-                di.Images.Add(i);
+                    di.Images = new List<Image>();
+                    Image i = new Image();
+                    i.ImagePath = "https://s3-eu-west-1.amazonaws.com/joshua-web-alexa-bucket/UploadsFromAlexa/" +
+                                  newName;
+                    di.Images.Add(i);
 
+                }
                 DynamoHelper.UpdateDateItem(di);
 
                 return RedirectToAction("Manager");
@@ -49,7 +54,6 @@ namespace joshuaSite.Controllers
             return View(di);
         }
 
-        [HttpPost]
         [Authorize]
         public ActionResult Delete(string id)
         {
@@ -65,10 +69,25 @@ namespace joshuaSite.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult Create(DateItem di)
+        public ActionResult Create(DateItem di, HttpPostedFileBase image = null)
         {
             if (ModelState.IsValid)
             {
+                if (image != null)
+                {
+                    string[] names = image.FileName.Split('.');
+                    string newName = Guid.NewGuid().ToString() + "." + names[names.Length - 1];
+                    image.SaveAs(Server.MapPath("~/_dynamic/") + newName);
+                    //save image
+                    S3Helper.SaveToS3(Server.MapPath("~/_dynamic/") + newName, "joshua-web-alexa-bucket","UploadsFromAlexa", newName);
+
+                    di.Images = new List<Image>();
+                    Image i = new Image();
+                    i.ImagePath = "https://s3-eu-west-1.amazonaws.com/joshua-web-alexa-bucket/UploadsFromAlexa/" + newName;
+                    di.Images.Add(i);
+
+                }
+
                 di.DateString = di.DateTime.ToString("dd-MM-yyyy");
                 di.FullDateStamp = di.DateTime;
                 di.ID = Guid.NewGuid().ToString();

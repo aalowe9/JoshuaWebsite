@@ -15,16 +15,19 @@
                 @Html.HiddenFor(m => m.DateString)
                 @Html.HiddenFor(m => m.DateTime)
                 @Html.HiddenFor(m => m.FullDateStamp)
-                @Html.HiddenFor(m => m.SpecialDate)
 
                 @Html.LabelFor(m => m.Synopsis)
-                @Html.TextBoxFor(u => u.Synopsis, new {@class = "form-control", @placeholder = "Synopsis", @id = "Synopsis"})
+                @Html.TextAreaFor(u => u.Synopsis, new {@class = "form-control", @placeholder = "Synopsis", @id = "Synopsis"})
                 @Html.ValidationMessageFor(u => u.Synopsis)
 
                 @Html.LabelFor(m => m.TextContent)
-                @Html.TextBoxFor(u => u.TextContent, new {@class = "form-control", @placeholder = "More info...", @id = "TextContent"})
-
+                @Html.TextAreaFor(u => u.TextContent, new {@class = "form-control", @placeholder = "More info...", @id = "TextContent"})
                 
+                @Html.LabelFor(model => model.SpecialDate)
+                @Html.EditorFor(model => model.SpecialDate)
+
+                <br/>
+
                 @if (@Model.Images[0].ImagePath != null)
                 {
                     <img src="@Model.Images[0].ImagePath" height="200"/>
@@ -67,9 +70,12 @@
 
 
                 <button class="btn btn-lg btn-primary btn-block" type="submit" id="submit-all">Update</button>
+                <br/>
+                <button class="btn btn-lg btn-primary btn-block" type="button" id="submit-all" onclick="location.href='/dates/manager'">Cancel</button>
             </fieldset>
         </div>
     }
+    
 
 </div>
 
