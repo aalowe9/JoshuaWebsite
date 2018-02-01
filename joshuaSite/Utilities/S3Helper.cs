@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using Amazon.Internal;
 using Amazon;
@@ -22,10 +24,10 @@ namespace joshuaSite.Utilities
             string s3FileName = @"testfile2.png";
 
 
-            SaveToS3(fileToBackup, myBucketName, s3DirectoryName, s3FileName);
+            //SaveToS3(fileToBackup, myBucketName, s3DirectoryName, s3FileName);
         }
 
-        public static bool SaveToS3(string localFilePath, string bucketName, string subDirectoryInBucket, string fileNameInS3)
+        public static async Task<bool> SaveToS3(Stream file, string bucketName, string subDirectoryInBucket, string fileNameInS3)
         {
             BasicAWSCredentials credentials = new BasicAWSCredentials(ConfigurationManager.AppSettings["S3_AccessKey"], ConfigurationManager.AppSettings["S3_SecretKey"]);
             AmazonS3Client client = new AmazonS3Client(credentials, RegionEndpoint.EUWest1);
@@ -43,8 +45,9 @@ namespace joshuaSite.Utilities
             }
             request.Key = fileNameInS3; //file name up in S3
             
-            request.FilePath = localFilePath; //local file name
-            utility.Upload(request); //commensing the transfer
+            request.InputStream = file; //local file name
+            
+            await utility.UploadAsync(request); //commensing the transfer
 
             return true;
         }

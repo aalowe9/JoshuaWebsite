@@ -151,16 +151,20 @@ namespace joshuaSite.Utilities
             }
         }
 
-        public static void UpdateDateItem(DateItem d)
+        public static void UpdateDateItem(DateItem d, HttpPostedFileBase image)
         {
             using (var client = Connect())
             {
                 DynamoDBContext context = new DynamoDBContext(client);
 
                 JoshuaDate x = context.Load<JoshuaDate>(d.ID);
-                if (d.Images != null)
+
+                if (image != null)
                 {
-                    x.ImageURL = d.Images.FirstOrDefault()?.ImagePath;
+                    if (d.Images != null)
+                    {
+                        x.ImageURL = d.Images.FirstOrDefault()?.ImagePath;
+                    }
                 }
                 x.SpecialDate = d.SpecialDate;
                 x.Synopsis = d.Synopsis;
