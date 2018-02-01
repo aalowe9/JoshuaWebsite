@@ -53,6 +53,10 @@ namespace joshuaSite.Utilities
                     case "Synopsis":
                         d.Synopsis = x.AsPrimitive().Value.ToString();
                         break;
+                    case "SpecialDate":
+                        d.SpecialDate = x.AsPrimitive().Value.ToString() == "1" ? true : false;
+
+                        break;
                 }
                 var r = new Random();
 
@@ -109,7 +113,7 @@ namespace joshuaSite.Utilities
 
                 Table DateTable = Table.LoadTable(client, tableName);
                 ScanFilter scanFilter = new ScanFilter();
-                scanFilter.AddCondition("TextContent", ScanOperator.IsNotNull);
+                scanFilter.AddCondition("Synopsis", ScanOperator.IsNotNull);
                 Search search = DateTable.Scan(scanFilter);
 
                 List<Document> documentList = new List<Document>();

@@ -1,6 +1,7 @@
 ﻿@using joshuaSite.Models
 @model List<joshuaSite.Models.YearContainer>
     
+<div class="container">
 <div class="timeline">
     
     @foreach (YearContainer uc in Model)
@@ -95,14 +96,12 @@
     
 
 </div>
+</div>
 
 <script src="/Scripts/jquery.js"></script>
 <script src="/Scripts/jquery.timelify.js"></script>
 <script>
     $('.timeline').timelify({
-        animLeft: "fadeInLeft",
-        animCenter: "fadeInUp",
-        animRight: "fadeInRight",
         animSpeed: 1000,
         offset: 150
     });

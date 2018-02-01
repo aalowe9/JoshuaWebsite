@@ -25,7 +25,7 @@
             
             <tbody>
             
-            @foreach (DateItem di in Model)
+            @foreach (DateItem di in Model.OrderBy(m => m.DateTime))
             {
 
                 <tr>
